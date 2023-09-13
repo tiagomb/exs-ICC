@@ -9,7 +9,7 @@ make
 
 for k in $METRICA
 do
-    likwid-perfctr -C ${CPU} -g ${k} -m ./interpola >${k}_interpola.log
+    likwid-perfctr -C ${CPU} -g ${k} -m ./interpola $1 >${k}_interpola.log
 done
 
 echo "powersave" > /sys/devices/system/cpu/cpufreq/policy3/scaling_governor 

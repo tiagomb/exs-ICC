@@ -9,10 +9,17 @@ int main(int argc, char **argv){
     double *x, *y, tempo, xe;
     void (*interpola[2]) (int, double *, double *, double);
     LIKWID_MARKER_INIT;
+
+    if (argc == 1){
+        fprintf (stderr, "O programa precisa receber um ponto como argumento.");
+        LIKWID_MARKER_CLOSE;
+        exit (1);
+    }
     interpola[0] = poliLagrange;
     interpola[1] = poliNewton;
     if (scanf ("%d", &tam) != 1){
         fprintf (stderr, "Erro ao ler o tamanho do vetor\n");
+        LIKWID_MARKER_CLOSE;
         exit (1);
     }
     x = (double *) malloc (tam * sizeof(double));
@@ -20,16 +27,19 @@ int main(int argc, char **argv){
     for (int i = 0; i < tam; i++){
         if (scanf ("%lf", &x[i]) != 1){
             fprintf (stderr, "Erro ao ler o vetor x\n");
+            LIKWID_MARKER_CLOSE;
             exit (1);
         }
         if (scanf ("%lf", &y[i]) != 1){
             fprintf (stderr, "Erro ao ler o vetor y\n");
+            LIKWID_MARKER_CLOSE;
             exit (1);
         }
     }
     xe = atoi(argv[1]);
-    if (!xe || xe < x[0] || xe > x[tam-1]){
+    if (xe < x[0] || xe > x[tam-1]){
         fprintf (stderr, "O ponto passado como paramêtro não pertence ao intervalo.");
+        LIKWID_MARKER_CLOSE;
         exit (1);
     }
     for (int i = 0; i < 2; i++){
