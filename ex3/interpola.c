@@ -28,6 +28,10 @@ int main(int argc, char **argv){
         }
     }
     xe = atoi(argv[1]);
+    if (!xe || xe < x[0] || xe > x[tam-1]){
+        fprintf (stderr, "O ponto passado como paramêtro não pertence ao intervalo.");
+        exit (1);
+    }
     for (int i = 0; i < 2; i++){
         LIKWID_MARKER_START(markerName("interpola", i));
         tempo = timestamp();

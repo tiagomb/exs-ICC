@@ -3,16 +3,13 @@
 #include "polinomios.h"
 
 void poliLagrange (int tam, double *x, double *y, double xe){
-    double num = 1, res = 0;
+    double res = 0;
     double *L = (double *) malloc (tam * sizeof(double));
     for (int i = 0; i<tam; i++){
-        num *= (xe - x[i]);
-    }
-    for (int i = 0; i<tam; i++){
-        L[i] = num;
+        L[i] = 1;
         for (int j = 0; j<tam; j++){
             if (i != j){
-                L[i] /= (x[i] - x[j]);
+                L[i] = L[i] * ((xe - x[j]) / (x[i] - x[j]));
             }
         }
     }
@@ -34,8 +31,8 @@ void poliNewton (int tam, double *x, double *y, double xe){
             num *= (xe - x[i-1]);
         }
         res += num * D[i];
-        for (int j = 0; j < tam - i - 1; j++){
-            D[j+1] = (D[j+1] - D[j]) / (x[j+i+1] - x[j]);
+        for (int j = tam - 1; j > i; j--){
+            D[j] = (D[j] - D[j - 1]) / (x[j] - x[j - i - 1]);
         }
     }
     printf ("%1.16e\n", res);
