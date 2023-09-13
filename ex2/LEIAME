@@ -1,0 +1,30 @@
+Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Bottamedi (GRR20220068)
+
+### Limitações do programa ###
+
+    -Em casos onde há divisão por zero, o programa não consegue calcular de forma correta a solução do sistema,
+    tendo como resultado nan ou inf.
+
+    -Caso a entrada tenha muitas casas decimais, o programa irá arredondar o número para caber em uma variável
+    do tipo double.
+
+    -Caso a entrada não esteja no formato solicitado pelo enunciado, o programa pode ter comportamentos inesperados.
+
+    -O método sem pivoteamento é bastante suscetível a erros numéricos, principalmente em casos onde o pivô é
+    extremamente menor que os elementos abaixo dele.
+
+    -Em caso de overflow, o programa pode apresentar soluções erradas e/ou com resíduos consideráveis.
+
+    -Números muito pequenos podem ser arrendodados para zero, fazendo com que a solução do sistema não seja correta.
+
+    -Caso o tamanho da matriz seja 0, o programa sofrerá segfault.
+
+    -O coeficientes não são aceitos se forem passados em forma fracionária, como por exemplo 1/2.
+
+### Decisões tomadas ###
+
+    -O Likwid foi usado de forma a medir a quantidade de MFLOPs necessárias para a solução, ou seja, mede as operações do
+    método utilizado e da retrosubstituição, desconsiderando o cálculo dos resíduos.
+
+    -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador "%1.8e" foi escolhido com
+    base no exercício anterior.
