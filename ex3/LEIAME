@@ -10,4 +10,4 @@ Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Botta
   
   -Em caso de overflow, o programa pode apresentar soluções erradas e/ou com resíduos consideráveis.
 
-  -Números muito pequenos podem ser arrendodados para zero, fazendo com que a solução do sistema não seja correta.
+  -Números muito pequenos podem ser arrendodados para zero, fazendo com que a interpolação não seja a mais precisa possível.
