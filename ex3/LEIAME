@@ -12,6 +12,8 @@ Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Botta
 
   -Números muito pequenos podem ser arrendodados para zero, fazendo com que a interpolação não seja a mais precisa possível.
 
+  -Se o ponto passado pertencer à tabela de pontos, o método de Lagrange implementado não funcionará, uma vez que ele foi implementado visando uma melhoria baseada em calcular o numerador de Li apenas 1 vez. 
+
 ### Decisões tomadas ###
 
   -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador escolhido foi "%1.16e".
