@@ -1,3 +1,13 @@
 Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Bottamedi (GRR20220068)
 
 ### Limitações do programa ###
+
+  -Em casos onde há divisão por zero, o programa não consegue calcular de forma correta a solução do sistema, tendo como resultado nan ou inf.
+
+  -Caso a entrada não esteja no formato solicitado, o código não funcionará de forma planejada.
+
+  -A interpolação polinomial é pior quanto maior for o grau do polinômio. (fenômeno de Runge).
+  
+  -Em caso de overflow, o programa pode apresentar soluções erradas e/ou com resíduos consideráveis.
+
+  -Números muito pequenos podem ser arrendodados para zero, fazendo com que a solução do sistema não seja correta.
