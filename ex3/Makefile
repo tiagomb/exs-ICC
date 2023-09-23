@@ -2,10 +2,10 @@
     PROG = interpola
 
 # Compilador
-	LIKWID_HOME = /home/soft/likwid
+	LIKWID_HOME = /usr/local
     CC     = gcc
     CFLAGS = -Wall -g -O3 -mavx -march=native -DLIKWID_PERFMON -I${LIKWID_HOME}/include 
-    LIBS = -L${LIKWID_HOME}/lib -llikwid
+    LIBS = -L${LIKWID_HOME}/lib -llikwid -lm
 
 # Lista de arquivos para distribuição
     DISTFILES = *.c *.h LEIAME* Makefile teste*.in script.sh

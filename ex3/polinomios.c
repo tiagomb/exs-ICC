@@ -3,13 +3,16 @@
 #include "polinomios.h"
 
 void poliLagrange (int tam, double *x, double *y, double xe){
-    double res = 0;
+    double num = 1, res = 0;
     double *L = (double *) malloc (tam * sizeof(double));
     for (int i = 0; i<tam; i++){
-        L[i] = 1;
+        num *= (xe - x[i]);
+    }
+    for (int i = 0; i<tam; i++){
+        L[i] = num/(xe - x[i]);
         for (int j = 0; j<tam; j++){
             if (i != j){
-                L[i] = L[i] * ((xe - x[j]) / (x[i] - x[j]));
+                L[i] /= (x[i] - x[j]);
             }
         }
     }
