@@ -11,3 +11,8 @@ Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Botta
   -Em caso de overflow, o programa pode apresentar soluções erradas e/ou com resíduos consideráveis.
 
   -Números muito pequenos podem ser arrendodados para zero, fazendo com que a interpolação não seja a mais precisa possível.
+
+### Decisões tomadas ###
+
+  -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador "%1.16e" foi escolhido com
+    base no exercício anterior.
