@@ -14,5 +14,4 @@ Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Botta
 
 ### Decisões tomadas ###
 
-  -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador "%1.16e" foi escolhido com
-    base no exercício anterior.
+  -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador escolhido foi "%1.16e".
