@@ -17,6 +17,11 @@ Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Botta
   -Mesmo que os pontos passados sejam equidistantes, o método de Newton não utiliza dessa propriedade que reduzir os cálculos em ponto flutuante.
 
   -Se o valor de N (quantidade de pontos) for passado como um número negativo o progama não funcionará corretamente.
+
+  -Como o enunciado especifica que pontos usados para a construção do polinômio não serão passados como argumento para o programa, o método de Lagrange foi implementado da maneira simplificada vista em aula. Por conta disso, esse método é mais suscetível a overflow/underflow, pois todas as multipĺicações são realizadas antes das divisões.
+
 ### Decisões tomadas ###
 
   -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador escolhido foi "%1.16e".
+
+  -O script apresenta como resultado a saída do programa conforme especificado no enunciado + os MFLOP/s dos métodos de Lagrange e Newton respectivamente. Antes de executar o script é necessário compilar o programa através do Makefile.
