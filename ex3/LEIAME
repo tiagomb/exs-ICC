@@ -16,6 +16,7 @@ Alunos: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Botta
 
   -Mesmo que os pontos passados sejam equidistantes, o método de Newton não utiliza dessa propriedade que reduzir os cálculos em ponto flutuante.
 
+  -Se o valor de N (quantidade de pontos) for passado como um número negativo o progama não funcionará corretamente.
 ### Decisões tomadas ###
 
   -Como nenhum formatador foi especificado para a impressão da solução/resíduo, o formatador escolhido foi "%1.16e".
