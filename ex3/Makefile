@@ -4,7 +4,7 @@
 # Compilador
 	LIKWID_HOME = /usr/local
     CC     = gcc
-    CFLAGS = -Wall -g -O3 -mavx -march=native -DLIKWID_PERFMON -I${LIKWID_HOME}/include 
+    CFLAGS = -Wall -g -O3 -mavx -march=native -I${LIKWID_HOME}/include -DLIKWID_PERFMON 
     LIBS = -L${LIKWID_HOME}/lib -llikwid -lm
 
 # Lista de arquivos para distribuição

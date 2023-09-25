@@ -11,6 +11,10 @@ int main(int argc, char **argv){
     LIKWID_MARKER_INIT;
     interpola[0] = poliLagrange;
     interpola[1] = poliNewton;
+    if (argc != 2){
+        fprintf (stderr, "Uso: %s <xe>\n", argv[0]);
+        exit (1);
+    }
     if (scanf ("%d", &tam) != 1){
         fprintf (stderr, "Erro ao ler o tamanho do vetor\n");
         exit (1);
@@ -27,7 +31,7 @@ int main(int argc, char **argv){
             exit (1);
         }
     }
-    xe = atoi(argv[1]);
+    xe = strtod(argv[1], NULL);
     if (xe < x[0] || xe > x[tam-1]){
         fprintf (stderr, "Erro: xe fora do intervalo\n");
         exit (1);
