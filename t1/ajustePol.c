@@ -69,7 +69,8 @@ int main (){
     }
     for (int i = 0; i <=n; i++){
         for (int j = 0; j <=n; j++){
-            a[i][j] = somatorios[i+j];
+            a[i][j][0] = somatorios[i+j][0];
+            a[i][j][1] = somatorios[i+j][1];
         }
     }
     printf ("\n");
