@@ -11,7 +11,7 @@ void gaussComMult (double ***a, double **b, int tam);
 
 void retroSub (double ***a, double **b, double **x, int tam);
 
-void calculaResiduo (double ***a, double **b, double **x, int tam);
+void calculaResiduo (double **coef, double **x, double **y, int pontos, int tam);
 
 void imprimeMatriz (double ***a, double **b, int tam);
 

@@ -31,7 +31,7 @@ void calculaB (double **b, int n, int k, double **y, double **x){
 
 int main (){
     int n, k, i;
-    double **x, **y, ***a, **b, **somatorios, soma[2];
+    double **x, **y, ***a, **b, **somas, **coef;
     fesetround (FE_DOWNWARD);
     scanf ("%d", &n);
     scanf ("%d", &k);
@@ -41,15 +41,17 @@ int main (){
         x[i] = malloc (2 * sizeof (double));
         y[i] = malloc (2 * sizeof (double));
     }
-    somatorios = malloc ((2*(n+1) - 1) * sizeof (double *));
+    somas = malloc ((2*(n+1) - 1) * sizeof (double *));
     for (int i = 0; i < 2*(n+1) - 1; i++){
-        somatorios[i] = malloc (2 * sizeof (double));
+        somas[i] = malloc (2 * sizeof (double));
     }
     a = malloc ((n+1) * sizeof (double **));
     b = malloc ((n+1) * sizeof (double *));
+    coef = malloc ((n+1) * sizeof (double *));
     for (int i = 0; i <=n; i++){
         a[i] = malloc ((n + 1) * sizeof (double *));
         b[i] = malloc (2 * sizeof (double));
+        coef[i] = malloc (2 * sizeof (double));
         for (int j = 0; j <=n; j++){
             a[i][j] = malloc (2 * sizeof (double));
         }
@@ -62,22 +64,26 @@ int main (){
         calculaIntervalo (y[i][0], y[i]);
     }
     for (i = 0; i <= n-1; i++){
-        somatorio(i, 0, x, k, somatorios[i]);
+        somatorio(i, 0, x, k, somas[i]);
     }
     for (int j = 0; j <= n; j++){
-        somatorio(j, i, x, k, somatorios[i+j]);
+        somatorio(j, i, x, k, somas[i+j]);
     }
     for (int i = 0; i <=n; i++){
         for (int j = 0; j <=n; j++){
-            a[i][j][0] = somatorios[i+j][0];
-            a[i][j][1] = somatorios[i+j][1];
+            a[i][j][0] = somas[i+j][0];
+            a[i][j][1] = somas[i+j][1];
         }
     }
     printf ("\n");
     calculaB (b, n + 1, k, y, x);
     gaussComMult (a, b, n+1);
-    retroSub (a, b, x, n+1);
-    calculaResiduo (a, b, x, n+1);
+    retroSub (a, b, coef, n+1);
+    for (int i = 0; i <=n; i++){
+        printf ("[%1.16e, %1.16e] ", coef[i][0], coef[i][1]);
+    }
+    printf ("\n");
+    calculaResiduo (coef, x, y, k, n + 1);
 
 
 
@@ -89,6 +95,7 @@ int main (){
     free (y);
     for (int i = 0; i <=n; i++){
         free (b[i]);
+        free (coef[i]);
         for (int j = 0; j <=n; j++){
             free (a[i][j]);
         }
@@ -96,9 +103,10 @@ int main (){
     }
     free (a);
     free (b);
-    for (int i = 0; i < 2*n - 1; i++){
-        free (somatorios[i]);
+    free (coef);
+    for (int i = 0; i < 2*(n+1) - 1; i++){
+        free (somas[i]);
     }
-    free (somatorios);
+    free (somas);
     return 0;
 }

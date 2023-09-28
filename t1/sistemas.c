@@ -47,31 +47,34 @@ void gaussComMult (double ***a, double **b, int tam){
 void retroSub (double ***a, double **b, double **x, int tam){
     double aux[2];
     for (int i = tam - 1; i >= 0; i--){
-        x[i] = b[i];
+        x[i][0] = b[i][0];
+        x[i][1] = b[i][1];
         for (int j = i + 1; j < tam; j++){
             multiplicaIntervalo (a[i][j], x[j], aux);
             subtraiIntervalo (x[i], aux, x[i]);
         }
         divideIntervalo (x[i], a[i][i], aux);
-         x[i] = aux;
+        x[i][0] = aux[0];
+        x[i][1] = aux[1];
     }
 }
 
-void calculaResiduo (double ***a, double **b, double **x, int tam){
-    double **r, aux[2];
-    r = malloc (tam * sizeof (double *));
-    for (int i = 0; i < tam; i++){
+void calculaResiduo (double **coef, double **x, double **y, int pontos, int tam){
+    double **r, aux[2], potencia[2];
+    r = malloc (pontos * sizeof (double *));
+    for (int i = 0; i < pontos; i++){
         r[i] = malloc (2 * sizeof (double));
     }
-    for (int i = 0; i < tam; i++){
-        r[i][0] = r[i][1] =  0;
+    for (int i = 0; i < pontos; i++){
+        r[i][0] = y[i][0];
+        r[i][1] = y[i][1];
         for (int j = 0; j < tam; j++){
-            multiplicaIntervalo (a[i][j], x[j], aux);
-            adicionaIntervalo (r[i], aux, r[i]);
+            potencia[0] = x[i][0];
+            potencia[1] = x[i][1];
+            potenciaIntervalo (x[i], j, potencia);
+            multiplicaIntervalo (coef[j], potencia, aux);
+            subtraiIntervalo (r[i], aux, r[i]);
         }
-        subtraiIntervalo (r[i], b[i], r[i]);
-    }
-    for (int i = 0; i < tam; i++){
         printf ("[%1.16e, %1.16e] ", r[i][0], r[i][1]);
         free (r[i]);
     }
