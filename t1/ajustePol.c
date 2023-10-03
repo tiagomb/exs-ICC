@@ -5,29 +5,7 @@
 #include "sistemas.h"
 #include "utils.h"
 #include <fenv.h>
-
-void somatorio (int expoenteCima, int expoenteBaixo, double **x, int k, double soma[2]){
-    double potencia1[2], potencia2[2], mult[2];
-    soma[0] = soma[1] = 0;
-    for (int i = 0; i < k; i++){
-        potenciaIntervalo (x[i], expoenteCima, potencia1);
-        potenciaIntervalo (x[i], expoenteBaixo, potencia2);
-        multiplicaIntervalo (potencia1, potencia2, mult);
-        adicionaIntervalo (soma, mult, soma);
-    }
-}
-
-void calculaB (double **b, int n, int k, double **y, double **x){
-    double potencia[2], mult[2];
-    for (int i = 0; i < n; i++){
-        b[i][0] = b[i][1] = 0;
-        for (int j = 0; j < k; j++){
-            potenciaIntervalo (x[j], i, potencia);
-            multiplicaIntervalo (potencia, y[j], mult);
-            adicionaIntervalo (b[i], mult, b[i]);
-        }
-    }
-}
+#include <likwid.h>
 
 int main (){
     int n, k, i;
@@ -56,37 +34,40 @@ int main (){
             a[i][j] = malloc (2 * sizeof (double));
         }
     }
-
+    LIKWID_MARKER_INIT;
     for (int i = 0; i < k; i++){
         scanf ("%lf", &x[i][0]);
         scanf ("%lf", &y[i][0]);
         calculaIntervalo (x[i][0], x[i]);
         calculaIntervalo (y[i][0], y[i]);
     }
+    LIKWID_MARKER_START("geraSistema");
+    //Calcula os somatórios necessários para a matriz A
     for (i = 0; i <= n-1; i++){
         somatorio(i, 0, x, k, somas[i]);
     }
     for (int j = 0; j <= n; j++){
         somatorio(j, i, x, k, somas[i+j]);
     }
+    //Realiza as atribuições dos somatórios para a matriz A, evitando cálculos repetidos
     for (int i = 0; i <=n; i++){
         for (int j = 0; j <=n; j++){
             a[i][j][0] = somas[i+j][0];
             a[i][j][1] = somas[i+j][1];
         }
     }
-    printf ("\n");
     calculaB (b, n + 1, k, y, x);
+    LIKWID_MARKER_STOP("geraSistema");
+    LIKWID_MARKER_START("resolveSistema");
     gaussComMult (a, b, n+1);
     retroSub (a, b, coef, n+1);
+    LIKWID_MARKER_STOP("resolveSistema");
     for (int i = 0; i <=n; i++){
         printf ("[%1.16e, %1.16e] ", coef[i][0], coef[i][1]);
     }
     printf ("\n");
     calculaResiduo (coef, x, y, k, n + 1);
-
-
-
+    LIKWID_MARKER_CLOSE;
     for (int i = 0; i < k; i++){
         free (x[i]);
         free (y[i]);
