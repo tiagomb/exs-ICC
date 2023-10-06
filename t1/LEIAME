@@ -10,7 +10,7 @@ Módulos:
 
     utils.h: Biblioteca disponiblizada na especificação do trabalho, com a adição de uma função que verifica se a alocação de memória foi feita corretamente.
 
-    
+    ajustePol.c: Main que recebe os valores de entrada e é responsável pela inicialização dos 
 
 
     
