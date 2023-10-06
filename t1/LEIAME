@@ -1,1 +1,17 @@
-sim
+Trabalho 1 - Ajuste Polinomial de Curvas com Cálculo Intervalar
+
+Dupla: Matheus Sebastian Alencar de Carvalho e Tiago Mendes Bottamedi
+
+Módulos:
+
+    interval.h: Biblioteca que calcula as operações com intervalos, diferente da biblioteca implementada para o ep01, essa biblioteca recebe e retorna os valores em double. As operações intervalares implementadas são: soma, subtração, multiplicação, divisão e exponenciação. 
+
+    sistemas.h: Biblioteca que resolve a matriz por meio de eliminação de Gauss com multiplicadores, calcula o resíduo e o somatório necessário para resolução do ajuste polinomial. 
+
+    utils.h: Biblioteca disponiblizada na especificação do trabalho, com a adição de uma função que verifica se a alocação de memória foi feita corretamente.
+
+    
+
+
+    
+
