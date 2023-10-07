@@ -18,7 +18,7 @@ Escolhas:
     
     A primeira foi feita por meio da utilização de um vetor tridimensional de double, em que existe duas matrizes, uma para a parte inferior do intervalo e uma para a parte superior do intervalo. As contas são feitas resolvendo cada um dos sistemaas que essas matrizes representam.
 
-    A segunda forma foi utilizando uma matriz de struct (intervalo_t), em que cada valor da matriz representa um intervalo. As operações são feitas com essa struct.
+    A segunda forma foi utilizando uma matriz de struct (intervalo_t) com dois double, em que cada valor da matriz representa um intervalo. As operações são feitas com essa struct.
 
     
 
