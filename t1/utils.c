@@ -1,3 +1,6 @@
+// Matheus Sebastian Alencar de Carvalho - GRR20220065
+// Tiago Mendes Bottamedi - GRR20220068
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -38,3 +41,42 @@ string_t markerName(string_t baseName, int n)
 
 }
 
+intervalo_t *alocaVetor(int tam){
+	intervalo_t *aux;
+	aux = malloc (tam * sizeof (intervalo_t ));
+	if (!aux){
+		fprintf (stderr, "Falha ao alocar vetor\n");
+		exit(2);
+	}
+	return aux;
+}
+
+intervalo_t **alocaMatriz(int tam){
+	intervalo_t **aux;
+	aux = malloc (tam * sizeof (intervalo_t *));
+	if (!aux){
+		fprintf (stderr, "Falha ao alocar matriz\n");
+		exit(2);
+	}
+	for (int i = 0; i < tam; i++){
+		aux[i] = malloc (tam * sizeof(intervalo_t ));
+		if (!aux[i]){
+			fprintf (stderr, "Falha ao alocar matriz\n");
+			exit(2);
+		}
+	}
+	return aux;
+}
+
+intervalo_t *liberaVetor(intervalo_t *vetor, int tam){
+	free (vetor);
+	return NULL;
+}
+
+intervalo_t **liberMatriz(intervalo_t **matriz, int tam){
+	for (int i = 0; i < tam; i++){
+		free (matriz[i]);
+	}
+	free (matriz);
+	return NULL;
+}

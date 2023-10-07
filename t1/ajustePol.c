@@ -1,3 +1,6 @@
+// Matheus Sebastian Alencar de Carvalho - GRR20220065
+// Tiago Mendes Bottamedi - GRR20220068
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -9,85 +12,72 @@
 
 int main (){
     int n, k, i;
-    double **x, **y, ***a, **b, **somas, **coef;
+    intervalo_t *x, *y, **a, *b, *somas, *coef, tempo;
     fesetround (FE_DOWNWARD);
-    scanf ("%d", &n);
-    scanf ("%d", &k);
-    x = malloc (k * sizeof (double *));
-    y = malloc (k * sizeof (double *));
-    for (int i = 0; i < k; i++){
-        x[i] = malloc (2 * sizeof (double));
-        y[i] = malloc (2 * sizeof (double));
+    if (scanf ("%d", &n) != 1){
+        fprintf (stderr, "Falha ao ler grau do polinômio\n");
+        exit (1);
     }
-    somas = malloc ((2*(n+1) - 1) * sizeof (double *));
-    for (int i = 0; i < 2*(n+1) - 1; i++){
-        somas[i] = malloc (2 * sizeof (double));
+    if (scanf ("%d", &k) != 1){
+        fprintf (stderr, "Falha ao ler número de pontos\n");
+        exit (1);
     }
-    a = malloc ((n+1) * sizeof (double **));
-    b = malloc ((n+1) * sizeof (double *));
-    coef = malloc ((n+1) * sizeof (double *));
-    for (int i = 0; i <=n; i++){
-        a[i] = malloc ((n + 1) * sizeof (double *));
-        b[i] = malloc (2 * sizeof (double));
-        coef[i] = malloc (2 * sizeof (double));
-        for (int j = 0; j <=n; j++){
-            a[i][j] = malloc (2 * sizeof (double));
-        }
-    }
+    x = alocaVetor(k);
+    y = alocaVetor(k);
+    somas = alocaVetor(2*(n+1) - 1);
+    a = alocaMatriz(n+1);
+    b = alocaVetor(n+1);
+    coef = alocaVetor(n+1);
     LIKWID_MARKER_INIT;
     for (int i = 0; i < k; i++){
-        scanf ("%lf", &x[i][0]);
-        scanf ("%lf", &y[i][0]);
-        calculaIntervalo (x[i][0], x[i]);
-        calculaIntervalo (y[i][0], y[i]);
+        if (scanf ("%lf", &x[i].inicio) != 1){
+            fprintf (stderr, "Falha ao ler um dos pontos\n");
+            exit (1);
+        }
+        if (scanf ("%lf", &y[i].inicio) != 1){
+            fprintf (stderr, "Falha ao ler um dos pontos\n");
+            exit (1);
+        }
+        calculaIntervalo (x[i].inicio, &x[i]);
+        calculaIntervalo (y[i].inicio, &y[i]);
     }
     LIKWID_MARKER_START("geraSistema");
+    tempo.inicio = timestamp();
     //Calcula os somatórios necessários para a matriz A
     for (i = 0; i <= n-1; i++){
-        somatorio(i, 0, x, k, somas[i]);
+        somatorio(i, 0, x, k, &somas[i]);
     }
     for (int j = 0; j <= n; j++){
-        somatorio(j, i, x, k, somas[i+j]);
+        somatorio(j, i, x, k, &somas[i+j]);
     }
     //Realiza as atribuições dos somatórios para a matriz A, evitando cálculos repetidos
     for (int i = 0; i <=n; i++){
         for (int j = 0; j <=n; j++){
-            a[i][j][0] = somas[i+j][0];
-            a[i][j][1] = somas[i+j][1];
+            a[i][j].inicio = somas[i+j].inicio;
+            a[i][j].fim = somas[i+j].fim;
         }
     }
     calculaB (b, n + 1, k, y, x);
+    tempo.inicio = timestamp() - tempo.inicio;
     LIKWID_MARKER_STOP("geraSistema");
     LIKWID_MARKER_START("resolveSistema");
+    tempo.fim = timestamp();
     gaussComMult (a, b, n+1);
     retroSub (a, b, coef, n+1);
+    tempo.fim = timestamp() - tempo.fim;
     LIKWID_MARKER_STOP("resolveSistema");
     for (int i = 0; i <=n; i++){
-        printf ("[%1.16e, %1.16e] ", coef[i][0], coef[i][1]);
+        printf ("[%1.8e, %1.8e] ", coef[i].inicio, coef[i].fim);
     }
     printf ("\n");
     calculaResiduo (coef, x, y, k, n + 1);
+    printf ("%1.8e\n%1.8e\n", tempo.inicio, tempo.fim);
     LIKWID_MARKER_CLOSE;
-    for (int i = 0; i < k; i++){
-        free (x[i]);
-        free (y[i]);
-    }
-    free (x);
-    free (y);
-    for (int i = 0; i <=n; i++){
-        free (b[i]);
-        free (coef[i]);
-        for (int j = 0; j <=n; j++){
-            free (a[i][j]);
-        }
-        free (a[i]);
-    }
-    free (a);
-    free (b);
-    free (coef);
-    for (int i = 0; i < 2*(n+1) - 1; i++){
-        free (somas[i]);
-    }
-    free (somas);
+    x = liberaVetor (x, k);
+    y = liberaVetor (y, k);
+    somas = liberaVetor (somas, 2*(n+1) - 1);
+    a = liberMatriz (a, n+1);
+    b = liberaVetor (b, n+1);
+    coef = liberaVetor (coef, n+1);
     return 0;
 }

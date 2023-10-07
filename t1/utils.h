@@ -1,9 +1,13 @@
+// Matheus Sebastian Alencar de Carvalho - GRR20220065
+// Tiago Mendes Bottamedi - GRR20220068
+
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
+#include "interval.h"
 
 // Valor absoluto de um número. Alternativa ao uso da função 'fabs()'
 #define ABS(num)  ((num) < 0.0 ? -(num) : (num))
@@ -29,6 +33,14 @@ typedef double rtime_t;
 // Funções
 rtime_t timestamp(void);
 string_t markerName(string_t baseName, int n);
+
+intervalo_t *alocaVetor(int tam);
+
+intervalo_t **alocaMatriz(int tam);
+
+intervalo_t *liberaVetor(intervalo_t *vetor, int tam);
+
+intervalo_t **liberMatriz(intervalo_t **matriz, int tam);
 
 #endif // __UTILS_H__
 
