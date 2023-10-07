@@ -16,9 +16,11 @@ Escolhas:
 
     O código foi implementado de duas maneiras,
     
-    A primeira foi feita por meio da utilização de um vetor tridimensional de double, em que existe duas matrizes, uma para a parte inferior do intervalo e uma para a parte superior do intervalo. As contas são feitas resolvendo cada um dos sistemaas que essas matrizes representam.
+    A primeira utiliza um vetor tridimensional de double, que representa duas matrizes, uma para a parte inferior do intervalo e uma para a parte superior do intervalo. As contas são feitas resolvendo cada um dos sistemaas que essas matrizes representam.
 
-    A segunda forma foi utilizando uma matriz de struct (intervalo_t) com dois double, em que cada valor da matriz representa um intervalo. As operações são feitas com essa struct.
+    A segunda forma foi utiliza uma matriz de struct (intervalo_t) com dois~valores double, o primeiro representando o inicio do intervalo e o segundo o final dele. Cada valor da matriz é do tipo intervalo_t que representa um intervalo. As operações são feitas por meio dessa struct.
+
+    Para os casos de teste, não foi percebido um diferença notória. Entretanto, foi escolhido a segunda opção como a opção final da implementação. 
 
     
 
