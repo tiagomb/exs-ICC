@@ -21,8 +21,6 @@ Escolhas:
     A segunda forma utiliza uma matriz de struct (intervalo_t) com dois valores double, o primeiro representando o inicio do intervalo e o segundo o final dele. Cada valor da matriz é do tipo intervalo_t que representa um intervalo. As operações e resoluções do sistema são feitas utilizando os dois valores dessa struct.
 
 
-    Para os casos de teste, não foi percebido um diferença notória.
-
-
+    Para os casos de teste, não foi percebido um diferença notória nem nos intervalos nem no tempo de execução.
     
 
