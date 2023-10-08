@@ -1,6 +1,6 @@
 Trabalho 1 - Ajuste Polinomial de Curvas com Cálculo Intervalar
 
-Dupla: Matheus Sebastian Alencar de Carvalho e Tiago Mendes Bottamedi
+Dupla: Matheus Sebastian Alencar de Carvalho (GRR20220065) e Tiago Mendes Bottamedi (GRR20220068)
 
 Módulos:
 
@@ -8,17 +8,17 @@ Módulos:
 
     sistemas.h: Biblioteca que resolve a matriz por meio de eliminação de Gauss com multiplicadores, calcula o resíduo e o somatório necessário para resolução do ajuste polinomial. 
 
-    utils.h: Biblioteca disponiblizada na especificação do trabalho, com a adição de uma função que verifica se a alocação de memória foi feita corretamente.
-
-    ajustePol.c: Main que recebe os valores de entrada e é responsável pela inicialização dos 
+    utils.h: Biblioteca disponiblizada na especificação do trabalho, com a adição de funções para alocação e liberação de memória e verificação do mesmo. 
+    
+    ajustePol.c: Main que recebe os valores de entrada e é responsável pela inicialização das estruturas, chamadas de procedimentos necessários para o funcionamento do código e a medição de tempo e FLOPS do programa. 
 
 Escolhas:
 
     O código foi implementado de duas maneiras,
     
-    A primeira utiliza um vetor tridimensional de double, que representa duas matrizes, uma para a parte inferior do intervalo e uma para a parte superior do intervalo. As contas são feitas resolvendo cada um dos sistemaas que essas matrizes representam.
+    A primeira utiliza um vetor tridimensional de double, que representa duas matrizes, uma para a parte inferior do intervalo e outra para a parte superior do intervalo. As contas são feitas resolvendo cada um dos sistemaas que essas matrizes representam.
 
-    A segunda forma foi utiliza uma matriz de struct (intervalo_t) com dois~valores double, o primeiro representando o inicio do intervalo e o segundo o final dele. Cada valor da matriz é do tipo intervalo_t que representa um intervalo. As operações são feitas por meio dessa struct.
+    A segunda forma utiliza uma matriz de struct (intervalo_t) com dois valores double, o primeiro representando o inicio do intervalo e o segundo o final dele. Cada valor da matriz é do tipo intervalo_t que representa um intervalo. As operações e resoluções do sistema são feitas utilizando os dois valores dessa struct.
 
     Para os casos de teste, não foi percebido um diferença notória. Entretanto, foi escolhido a segunda opção como a opção final da implementação. 
 
