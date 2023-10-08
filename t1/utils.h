@@ -38,7 +38,7 @@ intervalo_t *alocaVetor(int tam);
 
 intervalo_t **alocaMatriz(int tam);
 
-intervalo_t *liberaVetor(intervalo_t *vetor, int tam);
+intervalo_t *liberaVetor(intervalo_t *vetor);
 
 intervalo_t **liberMatriz(intervalo_t **matriz, int tam);
 

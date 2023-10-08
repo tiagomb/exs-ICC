@@ -41,6 +41,10 @@ string_t markerName(string_t baseName, int n)
 
 }
 
+/*As 2 funções abaixo de alocação podem apresentar o código de erro 2. Esse código significa que houve alguma falha durante o processo de alocação.*/
+
+/*Recebe como parâmetro um tamanho e aloca um vetor de intervalos desse tamanho,
+retornando o ponteiro para esse vetor*/
 intervalo_t *alocaVetor(int tam){
 	intervalo_t *aux;
 	aux = malloc (tam * sizeof (intervalo_t ));
@@ -51,6 +55,8 @@ intervalo_t *alocaVetor(int tam){
 	return aux;
 }
 
+/*Recebe como parâmetro um tamanho e aloca uma matriz de intervalos de tamanho linhas x tamanho colunas,
+retornando o ponteiro para essa matriz*/
 intervalo_t **alocaMatriz(int tam){
 	intervalo_t **aux;
 	aux = malloc (tam * sizeof (intervalo_t *));
@@ -68,11 +74,14 @@ intervalo_t **alocaMatriz(int tam){
 	return aux;
 }
 
-intervalo_t *liberaVetor(intervalo_t *vetor, int tam){
+/*Recebe como parâmetro um ponteiro do tipo intervalo, libera a memória alocada por ele e retorna NULL*/
+intervalo_t *liberaVetor(intervalo_t *vetor){
 	free (vetor);
 	return NULL;
 }
 
+/*Recebe como parâmetro um ponteiro para ponteiro do tipo intervalo e um inteiro indicando o tamanho da matriz.
+Libera toda a memória alocada por esse ponteiro e retorna NULL*/
 intervalo_t **liberMatriz(intervalo_t **matriz, int tam){
 	for (int i = 0; i < tam; i++){
 		free (matriz[i]);

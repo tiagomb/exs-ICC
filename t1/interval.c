@@ -8,6 +8,9 @@
 #include <fenv.h>
 #include "interval.h"
 
+/*Todas as funções neste arquivo, com exceção da calculaIntervalo, recebem como parâmetros 3 intervalos: os 2 primeiros serão os operandos
+e o terceiro é onde será armazenado o resultado.*/
+
 /*Soma os limites inferiores dos intervalos para dar o limite inferior do resultado e os limites superiores para dar o superior*/
 void adicionaIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_t *resultado){
     fesetround (FE_DOWNWARD);
@@ -63,6 +66,7 @@ void divideIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_
     resultado->fim = fmax (fmax (a, b), fmax(c, d));
 }
 
+/*Realiza as operações de potenciação conforme explicitado pelo enunciado.*/
 void potenciaIntervalo (intervalo_t intervalo, int expoente, intervalo_t *resultado){
     if (expoente == 0){
         resultado->inicio = 1;
@@ -83,7 +87,8 @@ void potenciaIntervalo (intervalo_t intervalo, int expoente, intervalo_t *result
     }
 }
 
-/*Calcula o intervalo que inclui o valor passado como parametro*/
+/*Recebe 2 parâmetros: um valor e um intervalo. Calcula o intervalo ao qual esse valor pertence e armazena no intervalo
+passado como parâmetro*/
 void calculaIntervalo (double valor, intervalo_t *intervalo){
     fesetround (FE_DOWNWARD);
     intervalo->inicio = valor;

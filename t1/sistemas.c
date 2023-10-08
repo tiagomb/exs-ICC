@@ -8,7 +8,8 @@
 #include "utils.h"
 #include "interval.h"
 
-/*A função abaixo realiza a troca de linhas para o pivoteamento parcial da Eliminação de Gauss*/
+/*Recebe como parâmetro a matriz e o vetor que representam o sistema linear, e dois inteiros indicando a linha
+atual e a linha do pivô para que possam ser trocadas, tanto na matriz quando no vetor*/
 void trocaLinhas (intervalo_t **a, intervalo_t *b, int i, int pivo){
     intervalo_t *aux;
     aux = a[i];
@@ -20,7 +21,8 @@ void trocaLinhas (intervalo_t **a, intervalo_t *b, int i, int pivo){
     b[pivo] = aux2;
 }
 
-/*Encontra o pivo para o pivoteamento parcial da Eliminação de Gauss*/
+/*Recebe como parâmetro a matriz que representa o lado esquerdo do sistema linear, e dois inteiros representando
+a linha atual e o tamanho da matriz. Retorna a linha do pivôs*/
 int encontraPivo (intervalo_t **a, int i, int tam){
     int pivo = i;
     for (int j = i + 1; j < tam; j++){
@@ -31,7 +33,8 @@ int encontraPivo (intervalo_t **a, int i, int tam){
     return pivo;
 }
 
-/*Realiza a Eliminação de Gauss com pivoteamento parcial em uma matriz de intervalos*/
+/*Recebe como paramêtros a matriz e o vetor que representam o sistema linear e o tamanho desse sistema.
+Realiza a Eliminação de Gauss com multiplicador e pivoteamento parcial*/
 void gaussComMult (intervalo_t **a, intervalo_t *b, int tam){
     intervalo_t m, mult;
     for (int i = 0; i < tam; i++){
@@ -51,7 +54,8 @@ void gaussComMult (intervalo_t **a, intervalo_t *b, int tam){
     }
 }
 
-/*Aplica a retrossubstituição em uma matriz de intervalos triangularizada pela Eliminação de Gauss*/
+/*Recebe como parâmetros a matriz de intervalos, o vetor de intervalos e o tamanho do sistema.
+Realiza a retrosubstituição e retorna o vetor solução*/
 void retroSub (intervalo_t **a, intervalo_t *b, intervalo_t *x, int tam){
     intervalo_t aux;
     for (int i = tam - 1; i >= 0; i--){
@@ -67,7 +71,8 @@ void retroSub (intervalo_t **a, intervalo_t *b, intervalo_t *x, int tam){
     }
 }
 
-/*Calcula o resíduo do polinômio obtido através do Método dos Mínimos Quadrados com base na fórmula r[i] = y[i] -f(x[i])*/
+/*Recebe como parâmetros os coeficientes obtidos após a resolução do sistema linear, os pontos x e f(x), a quantidade de pontos e o tamanho do polinômio.
+Calcula o resíduo na forma r(i) = f(x(i)) - p(x(i)) e imprime na tela*/
 void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, int pontos, int tam){
     intervalo_t *r, aux, potencia;
     r = malloc (pontos * sizeof (intervalo_t ));
@@ -87,7 +92,8 @@ void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, int pont
     free (r);
 }
 
-/*Imprime a matriz de intervalos*/
+/*Recebe como parâmetros a matriz e o vetor que representam o sistema linear, e um inteiro indicando seu tamanho.
+Imprime a matriz para fins de teste*/
 void imprimeMatriz (intervalo_t **a, intervalo_t *b, int tam){
     for (int i = 0; i < tam; i++){
         for (int j = 0; j < tam; j++){
@@ -97,7 +103,8 @@ void imprimeMatriz (intervalo_t **a, intervalo_t *b, int tam){
     }
 }
 
-/*Calcula o somatório do Método dos Mínimos Quadrados*/
+/*Recebe como paramêtros os expoentes dos elementos a serem multiplicados, o vetor de pontos x, a quantidade de pontos k e
+um intervalo onde será armazenado o somatório. A função calcula o somatório presente no Método dos Mínimos Quadrados*/
 void somatorio (int expoenteCima, int expoenteBaixo, intervalo_t *x, int k, intervalo_t *soma){
     intervalo_t potencia1, potencia2, mult;
     soma->inicio = soma->fim = 0;
@@ -109,7 +116,9 @@ void somatorio (int expoenteCima, int expoenteBaixo, intervalo_t *x, int k, inte
     }
 }
 
-/*Calcula o lado direito do sistema linear*/
+/*Recebe como parâmetros o vetor de pontos x, o vetor de pontos y, a quantidade de pontos k, o tamanho do polinômio n 
+e um vetor de intervalos onde será armazenado o lado direito do sistema linear. Realiza os cálculos necessários conforme
+o Método dos Mínimos Quadrados*/
 void calculaB (intervalo_t *b, int n, int k, intervalo_t *y, intervalo_t *x){
     intervalo_t potencia, mult;
     for (int i = 0; i < n; i++){

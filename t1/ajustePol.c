@@ -10,6 +10,8 @@
 #include <fenv.h>
 #include <likwid.h>
 
+/*O programa principal pode gerar o código de erro 1. Esse código significa que houve uma falha ao ler algum valor da entrada*/
+
 int main (){
     int n, k, i;
     intervalo_t *x, *y, **a, *b, *somas, *coef, tempo;
@@ -48,7 +50,7 @@ int main (){
         somatorio(i, 0, x, k, &somas[i]);
     }
     for (int j = 0; j <= n; j++){
-        somatorio(j, i, x, k, &somas[i+j]);
+        somatorio(i, j, x, k, &somas[i+j]);
     }
     //Realiza as atribuições dos somatórios para a matriz A, evitando cálculos repetidos
     for (int i = 0; i <=n; i++){
@@ -67,17 +69,17 @@ int main (){
     tempo.fim = timestamp() - tempo.fim;
     LIKWID_MARKER_STOP("resolveSistema");
     for (int i = 0; i <=n; i++){
-        printf ("[%1.8e, %1.8e] ", coef[i].inicio, coef[i].fim);
+        printf ("[%1.16e, %1.16e] ", coef[i].inicio, coef[i].fim);
     }
     printf ("\n");
     calculaResiduo (coef, x, y, k, n + 1);
-    printf ("%1.8e\n%1.8e\n", tempo.inicio, tempo.fim);
+    printf ("%1.16e\n%1.16e\n", tempo.inicio, tempo.fim);
     LIKWID_MARKER_CLOSE;
-    x = liberaVetor (x, k);
-    y = liberaVetor (y, k);
-    somas = liberaVetor (somas, 2*(n+1) - 1);
+    x = liberaVetor (x);
+    y = liberaVetor (y);
+    somas = liberaVetor (somas);
     a = liberMatriz (a, n+1);
-    b = liberaVetor (b, n+1);
-    coef = liberaVetor (coef, n+1);
+    b = liberaVetor (b);
+    coef = liberaVetor (coef);
     return 0;
 }
