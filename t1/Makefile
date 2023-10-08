@@ -16,8 +16,8 @@
 all: ajustePol
 
 clean:
-	@echo "Limpando sujeira ..."
-	@rm -f *~ *.bak
+	@echo "Limpando tudo ..."
+	@rm -f $(PROG) *.o core a.out $(DISTDIR) $(DISTDIR).tar
 
 ajustePol: ajustePol.o interval.o utils.o sistemas.o
 	gcc $(CFLAGS) -o ajustePol ajustePol.o interval.o utils.o sistemas.o $(LIBS)
@@ -36,10 +36,6 @@ utils.o: utils.c utils.h
 
 removeObjects:
 	-rm *.o
-
-purge:  clean
-	@echo "Limpando tudo ..."
-	@rm -f $(PROG) *.o core a.out $(DISTDIR) $(DISTDIR).tar
 
 dist: purge
 	@echo "Gerando arquivo de distribuição ($(DISTDIR).tar) ..."

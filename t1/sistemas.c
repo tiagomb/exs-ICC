@@ -116,6 +116,27 @@ void somatorio (int expoenteCima, int expoenteBaixo, intervalo_t *x, int k, inte
     }
 }
 
+void calculaA (intervalo_t **a, int n, int k, intervalo_t *x){
+    intervalo_t *somas;
+    int i;
+    somas = malloc ((2*n - 1) * sizeof (intervalo_t));
+     //Calcula os somatórios necessários para a matriz A
+    for (i = 0; i < n-1; i++){
+        somatorio(i, 0, x, k, &somas[i]);
+    }
+    for (int j = 0; j < n; j++){
+        somatorio(i, j, x, k, &somas[i+j]);
+    }
+    //Realiza as atribuições dos somatórios para a matriz A, evitando cálculos repetidos
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            a[i][j].inicio = somas[i+j].inicio;
+            a[i][j].fim = somas[i+j].fim;
+        }
+    }
+    somas = liberaVetor (somas);
+}
+
 /*Recebe como parâmetros o vetor de pontos x, o vetor de pontos y, a quantidade de pontos k, o tamanho do polinômio n 
 e um vetor de intervalos onde será armazenado o lado direito do sistema linear. Realiza os cálculos necessários conforme
 o Método dos Mínimos Quadrados*/

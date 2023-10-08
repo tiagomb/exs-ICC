@@ -13,8 +13,8 @@
 /*O programa principal pode gerar o código de erro 1. Esse código significa que houve uma falha ao ler algum valor da entrada*/
 
 int main (){
-    int n, k, i;
-    intervalo_t *x, *y, **a, *b, *somas, *coef, tempo;
+    int n, k;
+    intervalo_t *x, *y, **a, *b, *coef, tempo;
     fesetround (FE_DOWNWARD);
     if (scanf ("%d", &n) != 1){
         fprintf (stderr, "Falha ao ler grau do polinômio\n");
@@ -26,7 +26,6 @@ int main (){
     }
     x = alocaVetor(k);
     y = alocaVetor(k);
-    somas = alocaVetor(2*(n+1) - 1);
     a = alocaMatriz(n+1);
     b = alocaVetor(n+1);
     coef = alocaVetor(n+1);
@@ -45,20 +44,7 @@ int main (){
     }
     LIKWID_MARKER_START("geraSistema");
     tempo.inicio = timestamp();
-    //Calcula os somatórios necessários para a matriz A
-    for (i = 0; i <= n-1; i++){
-        somatorio(i, 0, x, k, &somas[i]);
-    }
-    for (int j = 0; j <= n; j++){
-        somatorio(i, j, x, k, &somas[i+j]);
-    }
-    //Realiza as atribuições dos somatórios para a matriz A, evitando cálculos repetidos
-    for (int i = 0; i <=n; i++){
-        for (int j = 0; j <=n; j++){
-            a[i][j].inicio = somas[i+j].inicio;
-            a[i][j].fim = somas[i+j].fim;
-        }
-    }
+    calculaA (a, n + 1, k, x);
     calculaB (b, n + 1, k, y, x);
     tempo.inicio = timestamp() - tempo.inicio;
     LIKWID_MARKER_STOP("geraSistema");
@@ -77,7 +63,6 @@ int main (){
     LIKWID_MARKER_CLOSE;
     x = liberaVetor (x);
     y = liberaVetor (y);
-    somas = liberaVetor (somas);
     a = liberMatriz (a, n+1);
     b = liberaVetor (b);
     coef = liberaVetor (coef);

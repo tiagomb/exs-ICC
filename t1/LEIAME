@@ -14,13 +14,15 @@ Módulos:
 
 Escolhas:
 
-    O código foi implementado de duas maneiras,
-    
-    A primeira utiliza um vetor tridimensional de double, que representa duas matrizes, uma para a parte inferior do intervalo e outra para a parte superior do intervalo. As contas são feitas resolvendo cada um dos sistemaas que essas matrizes representam.
+    Foram testadas duas opções de código: uma com vetores do tipo double e outra com vetores do tipo intervalo_t. A primeira opção aumentava a quantidade de ponteiros
+    e alocações de memória, além de aumentar o número de cálculos para acessar os elementos. Por conta disso, e também por ser mais legível, a segunda opção foi a escolhida para a versão final do trabalho.
 
-    A segunda forma utiliza uma matriz de struct (intervalo_t) com dois valores double, o primeiro representando o inicio do intervalo e o segundo o final dele. Cada valor da matriz é do tipo intervalo_t que representa um intervalo. As operações e resoluções do sistema são feitas utilizando os dois valores dessa struct.
+    Como o script precisa rodar o programa duas vezes para obter as informações dos dois grupos (FLOPS_DP e ENERGY), ele deve receber o nome do arquivo de entrada como parâmetro. Dentro do script, o parâmetro é utilizado como a entrada padrão do programa (./ajustePol < $1), sendo executado da maneira pedida pelo enunciado. Caso seja desejado, o redirecionamento da saída pode ser feito diretamente na execução do script (bash ./script.sh  <arquivo_entrada> > arquivo_saida).
 
+Limitações: 
 
-    Para os casos de teste, não foi percebido um diferença notória nem nos intervalos nem no tempo de execução.
-    
+    O programa não aceita valores de entrada que não sejam números. Caso seja inserido um valor que não seja um número, o programa irá parar sua execução e retornar um erro.
 
+    O programa não lida com valores fora do formato especificado. Por exemplo, caso sejam passados mais ou menos pontos do que o indicado na entrada, o programa pode apresentar comportamento inesperado.
+
+    As mesmas limitações do ep01 também se aplicam a esse trabalho.

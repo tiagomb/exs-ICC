@@ -21,6 +21,8 @@ void imprimeMatriz (intervalo_t **a, intervalo_t *b, int tam);
 
 void somatorio (int expoenteCima, int expoenteBaixo, intervalo_t *x, int k, intervalo_t *soma);
 
+void calculaA (intervalo_t **a, int n, int k, intervalo_t *x);
+
 void calculaB (intervalo_t *b, int n, int k, intervalo_t *y, intervalo_t *x);
 
 #endif // ___SISTEMAS_H___
