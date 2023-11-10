@@ -67,3 +67,32 @@ double calculaPotencia (double valor, int expoente){
 		resultado *= valor;
 	}
 }
+
+/*Recebe como parâmetro um tamanho e aloca uma matriz de intervalos de tamanho linhas x tamanho colunas,
+retornando o ponteiro para essa matriz*/
+intervalo_t **alocaMatriz(int tam){
+	intervalo_t **aux;
+	aux = malloc (tam * sizeof (intervalo_t *));
+	if (!aux){
+		fprintf (stderr, "Falha ao alocar matriz\n");
+		exit(2);
+	}
+	for (int i = 0; i < tam; i++){
+		aux[i] = malloc (tam * sizeof(intervalo_t ));
+		if (!aux[i]){
+			fprintf (stderr, "Falha ao alocar matriz\n");
+			exit(2);
+		}
+	}
+	return aux;
+}
+
+/*Recebe como parâmetro um ponteiro para ponteiro do tipo intervalo e um inteiro indicando o tamanho da matriz.
+Libera toda a memória alocada por esse ponteiro e retorna NULL*/
+intervalo_t **liberMatriz(intervalo_t **matriz, int tam){
+	for (int i = 0; i < tam; i++){
+		free (matriz[i]);
+	}
+	free (matriz);
+	return NULL;
+}

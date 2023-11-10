@@ -46,7 +46,7 @@ void multiplicaIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, interv
 
 /*Mesma ideia da multiplicaçao. Caso 0 pertença ao intervalo 2, o resultado é um intervalo de -infinito a +infinito.*/
 void divideIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_t *resultado){
-    if(intervalo2.inicio <= 0 && intervalo2.fim >= 0){
+    if(intervalo2.inicio <= 0 && intervalo2.fim >= 0){ //verificar multiplicação negativa
         resultado->inicio = -INFINITY;
         resultado->fim = INFINITY;
         return;

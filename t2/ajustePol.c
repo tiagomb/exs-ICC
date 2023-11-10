@@ -13,14 +13,10 @@
 /*O programa principal pode gerar o código de erro 1. Esse código significa que houve uma falha ao ler algum valor da entrada*/
 
 int main (){
-    int n;
+    int n = 4;
     long long int k;
     intervalo_t *x, *y, **a, *b, *coef, tempo;
     fesetround (FE_DOWNWARD);
-    if (scanf ("%d", &n) != 1){
-        fprintf (stderr, "Falha ao ler grau do polinômio\n");
-        exit (1);
-    }
     if (scanf ("%lld", &k) != 1){
         fprintf (stderr, "Falha ao ler número de pontos\n");
         exit (1);

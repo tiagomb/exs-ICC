@@ -116,7 +116,7 @@ void somatorio (int expoenteCima, int expoenteBaixo, intervalo_t *x, long long i
     }
 }
 
-void calculaA (intervalo_t **a, int n, int k, intervalo_t *x){
+void calculaA (intervalo_t **a, int n, long long int k, intervalo_t *x){
     intervalo_t *somas;
     int i;
     somas = malloc ((2*n - 1) * sizeof (intervalo_t));

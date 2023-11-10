@@ -13,21 +13,17 @@
 /*O programa principal pode gerar o código de erro 1. Esse código significa que houve uma falha ao ler algum valor da entrada*/
 
 int main (){
-    int n;
+    int n = 4;
     long long int k;
-    intervalo_t *x, *y, *a, *b, *coef, tempo;
+    intervalo_t *x, *y, **a, *b, *coef, tempo;
     fesetround (FE_DOWNWARD);
-    if (scanf ("%d", &n) != 1){
-        fprintf (stderr, "Falha ao ler grau do polinômio\n");
-        exit (1);
-    }
     if (scanf ("%lld", &k) != 1){
         fprintf (stderr, "Falha ao ler número de pontos\n");
         exit (1);
     }
     x = alocaVetor(k);
     y = alocaVetor(k);
-    a = alocaVetor((n+1)*(n+1));
+    a = alocaMatriz(n+1);
     b = alocaVetor(n+1);
     coef = alocaVetor(n+1);
     LIKWID_MARKER_INIT;
@@ -45,8 +41,7 @@ int main (){
     }
     LIKWID_MARKER_START("geraSistema");
     tempo.inicio = timestamp();
-    calculaA (a, n + 1, k, x);
-    calculaB (b, n + 1, k, y, x);
+    calculaAeB (a, b, n+1, k, x, y);
     tempo.inicio = timestamp() - tempo.inicio;
     LIKWID_MARKER_STOP("geraSistema");
     LIKWID_MARKER_START("resolveSistema");
@@ -64,7 +59,7 @@ int main (){
     LIKWID_MARKER_CLOSE;
     x = liberaVetor (x);
     y = liberaVetor (y);
-    a = liberaVetor (a);
+    a = liberMatriz (a, n+1);
     b = liberaVetor (b);
     coef = liberaVetor (coef);
     return 0;

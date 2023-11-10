@@ -51,7 +51,6 @@ void divideIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_
         resultado->fim = INFINITY;
         return;
     }
-
     fesetround (FE_DOWNWARD);
     double a = intervalo1.inicio / intervalo2.inicio;
     double b = intervalo1.inicio / intervalo2.fim;

@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
-#include "interval.h"
+#include "intervalOtim.h"
 
 // Valor absoluto de um número. Alternativa ao uso da função 'fabs()'
 #define ABS(num)  ((num) < 0.0 ? -(num) : (num))
@@ -36,9 +36,13 @@ string_t markerName(string_t baseName, int n);
 
 intervalo_t *alocaVetor(long long int tam);
 
+intervalo_t **alocaMatriz(int tam);
+
 intervalo_t *liberaVetor(intervalo_t *vetor);
 
 double calculaPotencia (double valor, int expoente);
+
+intervalo_t **liberMatriz(intervalo_t **matriz, int tam);
 
 #endif // __UTILSOTIM_H__
 

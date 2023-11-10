@@ -15,7 +15,7 @@ void gaussComMult (intervalo_t **a, intervalo_t *b, int tam);
 
 void retroSub (intervalo_t **a, intervalo_t *b, intervalo_t *x, int tam);
 
-void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, int pontos, int tam);
+void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, long long int pontos, int tam);
 
 void imprimeMatriz (intervalo_t **a, intervalo_t *b, int tam);
 

@@ -22,17 +22,32 @@ clean:
 ajustePol: ajustePol.o interval.o utils.o sistemas.o
 	gcc $(CFLAGS) -o ajustePol ajustePol.o interval.o utils.o sistemas.o $(LIBS)
 
+ajustePolOtim: ajustePolOtim.o intervalOtim.o utilsOtim.o sistemasOtim.o
+	gcc $(CFLAGS) -o ajustePolOtim ajustePolOtim.o intervalOtim.o utilsOtim.o sistemasOtim.o $(LIBS)
+
 ajustePol.o: ajustePol.c
 	gcc -c $(CFLAGS) ajustePol.c  $(LIBS)
+
+ajustePolOtim.o: ajustePolOtim.c
+	gcc -c $(CFLAGS) ajustePolOtim.c  $(LIBS)
 
 interval.o: interval.c interval.h
 	gcc -c $(CFLAGS) interval.c $(LIBS)
 
+intervalOtim.o: intervalOtim.c intervalOtim.h
+	gcc -c $(CFLAGS) intervalOtim.c $(LIBS)
+
 sistemas.o: sistemas.c sistemas.h
 	gcc -c $(CFLAGS) sistemas.c $(LIBS)
 
+sistemasOtim.o: sistemasOtim.c sistemasOtim.h
+	gcc -c $(CFLAGS) sistemasOtim.c $(LIBS)
+
 utils.o: utils.c utils.h
 	gcc -c $(CFLAGS) utils.c $(LIBS)
+
+utilsOtim.o: utilsOtim.c utilsOtim.h
+	gcc -c $(CFLAGS) utilsOtim.c $(LIBS)
 
 removeObjects:
 	-rm *.o
