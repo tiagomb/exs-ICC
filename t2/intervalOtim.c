@@ -7,6 +7,7 @@
 #include <float.h>
 #include <fenv.h>
 #include "intervalOtim.h"
+#include "utilsOtim.h"
 
 /*Todas as funções neste arquivo, com exceção da calculaIntervalo, recebem como parâmetros 3 intervalos: os 2 primeiros serão os operandos
 e o terceiro é onde será armazenado o resultado.*/

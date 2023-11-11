@@ -66,6 +66,7 @@ double calculaPotencia (double valor, int expoente){
 	for (int i = 1; i < expoente; i++){
 		resultado *= valor;
 	}
+	return resultado;
 }
 
 /*Recebe como parâmetro um tamanho e aloca uma matriz de intervalos de tamanho linhas x tamanho colunas,

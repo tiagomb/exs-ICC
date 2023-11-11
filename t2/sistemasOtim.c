@@ -71,13 +71,13 @@ void retroSub (intervalo_t **a, intervalo_t *b, intervalo_t *x, int tam){
     }
 }
 
-void calculaParteResiduo (intervalo_t x, int expoente, intervalo_t coef, intervalo_t r){
+void calculaParteResiduo (intervalo_t *x, int expoente, intervalo_t *coef, intervalo_t *r){
     intervalo_t potencia, aux;
-    potencia.inicio = x.inicio;
-    potencia.fim = x.fim;
-    potenciaIntervalo (x, expoente, &potencia);
-    multiplicaIntervalo (potencia, coef, &aux);
-    subtraiIntervalo (r, aux, &r);
+    potencia.inicio = x->inicio;
+    potencia.fim = x->fim;
+    potenciaIntervalo (*x, expoente, &potencia);
+    multiplicaIntervalo (potencia, *coef, &aux);
+    subtraiIntervalo (*r, aux, r);
 }
 
 /*Recebe como parâmetros os coeficientes obtidos após a resolução do sistema linear, os pontos x e f(x), a quantidade de pontos e o tamanho do polinômio.
@@ -103,14 +103,14 @@ void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, long lon
         r[i+7].inicio = y[i+7].inicio;
         r[i+7].fim = y[i+7].fim;
         for (int j = 0; j < tam; j++){
-            calculaParteResiduo (x[i], j, coef[j], r[i]);
-            calculaParteResiduo (x[i+1], j, coef[j], r[i+1]);
-            calculaParteResiduo (x[i+2], j, coef[j], r[i+2]);
-            calculaParteResiduo (x[i+3], j, coef[j], r[i+3]);
-            calculaParteResiduo (x[i+4], j, coef[j], r[i+4]);
-            calculaParteResiduo (x[i+5], j, coef[j], r[i+5]);
-            calculaParteResiduo (x[i+6], j, coef[j], r[i+6]);
-            calculaParteResiduo (x[i+7], j, coef[j], r[i+7]);
+            calculaParteResiduo (&x[i], j, &coef[j], &r[i]);
+            calculaParteResiduo (&x[i+1], j, &coef[j], &r[i+1]);
+            calculaParteResiduo (&x[i+2], j, &coef[j], &r[i+2]);
+            calculaParteResiduo (&x[i+3], j, &coef[j], &r[i+3]);
+            calculaParteResiduo (&x[i+4], j, &coef[j], &r[i+4]);
+            calculaParteResiduo (&x[i+5], j, &coef[j], &r[i+5]);
+            calculaParteResiduo (&x[i+6], j, &coef[j], &r[i+6]);
+            calculaParteResiduo (&x[i+7], j, &coef[j], &r[i+7]);
         }
         printf ("[%1.16e, %1.16e] ", r[i].inicio, r[i].fim);
         printf ("[%1.16e, %1.16e] ", r[i+1].inicio, r[i+1].fim);
@@ -125,7 +125,7 @@ void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, long lon
         r[i].inicio = y[i].inicio;
         r[i].fim = y[i].fim;
         for (int j = 0; j < tam; j++){
-            calculaParteResiduo (x[i], j, coef[j], r[i]);
+            calculaParteResiduo (&x[i], j, &coef[j], &r[i]);
         }
         printf ("[%1.16e, %1.16e] ", r[i].inicio, r[i].fim);
     }
@@ -144,12 +144,12 @@ void imprimeMatriz (intervalo_t **a, intervalo_t *b, int tam){
     }
 }
 
-void calculaParte (intervalo_t x, intervalo_t y, int expoente, intervalo_t b, intervalo_t soma){
+void calculaParte (intervalo_t *x, intervalo_t *y, int expoente, intervalo_t *b, intervalo_t *soma){
     intervalo_t potencia;
-    potenciaIntervalo(x, expoente, &potencia);
-    adicionaIntervalo(soma, potencia, &soma);
-    multiplicaIntervalo(potencia, y, &potencia);
-    adicionaIntervalo(b, potencia, &b);
+    potenciaIntervalo(*x, expoente, &potencia);
+    adicionaIntervalo(*soma, potencia, soma);
+    multiplicaIntervalo(potencia, *y, &potencia);
+    adicionaIntervalo(*b, potencia, b);
 }
 
 void calculaAeB (intervalo_t **a, intervalo_t *b, int n, int k, intervalo_t *x, intervalo_t *y){
@@ -167,14 +167,14 @@ void calculaAeB (intervalo_t **a, intervalo_t *b, int n, int k, intervalo_t *x, 
     }
     for (long long int i = 0; i < k-k%8; i+=8){
         for (int j = 0; j < n; j++){
-            calculaParte(x[i], y[i], j, b[j], somas[j]);
-            calculaParte(x[i+1], y[i+2], j, b[j], somas[j]);
-            calculaParte(x[i+2], y[i+3], j, b[j], somas[j]);
-            calculaParte(x[i+3], y[i+4], j, b[j], somas[j]);
-            calculaParte(x[i+4], y[i+5], j, b[j], somas[j]);
-            calculaParte(x[i+5], y[i+6], j, b[j], somas[j]);
-            calculaParte(x[i+6], y[i+7], j, b[j], somas[j]);
-            calculaParte(x[i+7], y[i+8], j, b[j], somas[j]);
+            calculaParte(&x[i], &y[i], j, &b[j], &somas[j]);
+            calculaParte(&x[i+1], &y[i+1], j, &b[j], &somas[j]);
+            calculaParte(&x[i+2], &y[i+2], j, &b[j], &somas[j]);
+            calculaParte(&x[i+3], &y[i+3], j, &b[j], &somas[j]);
+            calculaParte(&x[i+4], &y[i+4], j, &b[j], &somas[j]);
+            calculaParte(&x[i+5], &y[i+5], j, &b[j], &somas[j]);
+            calculaParte(&x[i+6], &y[i+6], j, &b[j], &somas[j]);
+            calculaParte(&x[i+7], &y[i+7], j, &b[j], &somas[j]);
         }
         for (int j = n; j < 2*n - 1; j++){
             potenciaIntervalo (x[i], j, &potencia);
@@ -197,7 +197,7 @@ void calculaAeB (intervalo_t **a, intervalo_t *b, int n, int k, intervalo_t *x, 
     }
     for (long long int i = k-k%8; i < k; i++){
         for (int j = 0; j < n; j++){
-            calculaParte(x[i], y[i], j, b[j], somas[j]);
+            calculaParte(&x[i], &y[i], j, &b[j], &somas[j]);
         }
         for (int j = n; j < 2*n - 1; j++){
             potenciaIntervalo (x[i], j, &potencia);
