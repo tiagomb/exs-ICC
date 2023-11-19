@@ -7,22 +7,18 @@
 #include <stdio.h>
 #include "intervalOtim.h"
 
-void trocaLinhas (intervalo_t **a, intervalo_t *b, int i, int pivo);
+void trocaLinhas (intervalo_t ** restrict a, intervaloA_t * restrict b, int i, int pivo);
 
-int encontraPivo (intervalo_t **a, int i, int tam);
+int encontraPivo (intervalo_t ** restrict a, int i, int tam);
 
-void gaussComMult (intervalo_t **a, intervalo_t *b, int tam);
+void gaussComMult (intervalo_t ** restrict a, intervaloA_t * restrict b, int tam);
 
-void retroSub (intervalo_t **a, intervalo_t *b, intervalo_t *x, int tam);
+void retroSub (intervalo_t ** restrict a, intervaloA_t * restrict b, intervaloA_t * restrict x, int tam);
 
-void calculaParteResiduo (intervalo_t *x, int expoente, intervalo_t *coef, intervalo_t *r);
+void calculaResiduo (intervaloA_t * restrict coef, intervaloA_t * restrict x, intervaloA_t * restrict y, long long int pontos, int tam, intervaloA_t * restrict r);
 
-void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, long long int pontos, int tam);
+void imprimeMatriz (intervalo_t ** restrict a, intervaloA_t * restrict b, int tam);
 
-void imprimeMatriz (intervalo_t **a, intervalo_t *b, int tam);
-
-void calculaParte (intervalo_t *x, intervalo_t *y, int expoente, intervalo_t *b, intervalo_t *soma);
-
-void calculaAeB (intervalo_t **a, intervalo_t *b, int n, int k, intervalo_t *x, intervalo_t *y);
+void calculaAeB (intervalo_t ** restrict a, intervaloA_t * restrict b, int n, int k, intervaloA_t * restrict x, intervaloA_t * restrict y);
 
 #endif // ___SISTEMASOTIM_H___

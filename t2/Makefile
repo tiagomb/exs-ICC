@@ -5,7 +5,7 @@
 	LIKWID_HOME = /home/soft/likwid
     CC     = gcc
     CFLAGS = -Wall -g -O3 -mavx -march=native -I${LIKWID_HOME}/include -DLIKWID_PERFMON 
-    LIBS = -L${LIKWID_HOME}/lib  -lm
+    LIBS = -L${LIKWID_HOME}/lib -llikwid -lm
 
 # Lista de arquivos para distribuição
     DISTFILES = *.c *.h LEIAME* Makefile teste*.in script.sh

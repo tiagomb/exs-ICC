@@ -86,9 +86,9 @@ void calculaResiduo (intervalo_t *coef, intervalo_t *x, intervalo_t *y, long lon
             multiplicaIntervalo (coef[j], potencia, &aux);
             subtraiIntervalo (r[i], aux, &r[i]);
         }
-        printf ("[%1.16e, %1.16e] ", r[i].inicio, r[i].fim);
+        //printf ("[%1.16e, %1.16e] ", r[i].inicio, r[i].fim);
     }
-    printf ("\n");
+    //printf ("\n");
     free (r);
 }
 

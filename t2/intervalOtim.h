@@ -5,23 +5,30 @@
 #define INTERVALOTIM_H
 
 #include <stdint.h>
+#include <fenv.h>
+#include <float.h>
+#include <math.h>
 
 typedef struct intervalo {
     double inicio;
     double fim;
-} intervalo_t;
+}intervalo_t;
 
-void adicionaIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_t *resultado);
+typedef struct intervaloA{
+    double *inicio;
+    double *fim;
+}intervaloA_t;
 
-void subtraiIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_t *resultado);
+void adicionaIntervalo (double inicio1, double fim1, double inicio2, double fim2, double *resini, double *resfim);
 
-void multiplicaIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_t *resultado);
+void subtraiIntervalo (double inicio1, double fim1, double inicio2, double fim2, double *resini, double *resfim);
 
-void divideIntervalo (intervalo_t intervalo1, intervalo_t intervalo2, intervalo_t *resultado);
+void multiplicaIntervalo (double inicio1, double fim1, double inicio2, double fim2, double *resini, double *resfim);
 
-void potenciaIntervalo (intervalo_t intervalo, int expoente, intervalo_t *resultado);
+void divideIntervalo (double inicio1, double fim1, double inicio2, double fim2, double *resini, double *resfim);
 
-void calculaIntervalo (double valor, intervalo_t *intervalo);
+void potenciaIntervalo(double inicio, double fim, int expoente, double *resini, double *resfim);
 
+void calculaIntervalo (double inicio, double *fim);
 
 #endif // INTERVALOTIM_H

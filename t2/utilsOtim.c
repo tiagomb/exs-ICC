@@ -45,10 +45,16 @@ string_t markerName(string_t baseName, int n)
 
 /*Recebe como parâmetro um tamanho e aloca um vetor de intervalos desse tamanho,
 retornando o ponteiro para esse vetor*/
-intervalo_t *alocaVetor(long long int tam){
-	intervalo_t *aux;
-	aux = malloc (tam * sizeof (intervalo_t ));
+intervaloA_t *alocaVetor(long long int tam){
+	intervaloA_t *aux;
+	aux = malloc (tam * sizeof (intervaloA_t));
 	if (!aux){
+		fprintf (stderr, "Falha ao alocar vetor\n");
+		exit(2);
+	}
+	aux->inicio = malloc (tam * sizeof (double));
+	aux->fim = malloc (tam * sizeof (double));
+	if (!aux->inicio || !aux->fim){
 		fprintf (stderr, "Falha ao alocar vetor\n");
 		exit(2);
 	}
@@ -56,17 +62,11 @@ intervalo_t *alocaVetor(long long int tam){
 }
 
 /*Recebe como parâmetro um ponteiro do tipo intervalo, libera a memória alocada por ele e retorna NULL*/
-intervalo_t *liberaVetor(intervalo_t *vetor){
+intervaloA_t *liberaVetor(intervaloA_t *vetor){
+	free (vetor->inicio);
+	free (vetor->fim);
 	free (vetor);
 	return NULL;
-}
-
-double calculaPotencia (double valor, int expoente){
-	double resultado = valor;
-	for (int i = 1; i < expoente; i++){
-		resultado *= valor;
-	}
-	return resultado;
 }
 
 /*Recebe como parâmetro um tamanho e aloca uma matriz de intervalos de tamanho linhas x tamanho colunas,
@@ -96,4 +96,12 @@ intervalo_t **liberMatriz(intervalo_t **matriz, int tam){
 	}
 	free (matriz);
 	return NULL;
+}
+
+double calculaPotencia(double base, int expoente){
+	double aux = 1;
+	for (int i = 0; i < expoente; i++){
+		aux *= base;
+	}
+	return aux;
 }

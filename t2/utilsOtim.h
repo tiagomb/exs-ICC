@@ -9,6 +9,18 @@
 #include <sys/time.h>
 #include "intervalOtim.h"
 
+#define UF 4
+#define BK 8
+
+#define CALCULA_POTENCIA(valor, expoente) ({ \
+    double resultado_macro = (valor); \
+    for (int i_macro = 1; i_macro < (expoente); i_macro++) { \
+        resultado_macro *= (valor); \
+    } \
+    resultado_macro; \
+})
+
+
 // Valor absoluto de um número. Alternativa ao uso da função 'fabs()'
 #define ABS(num)  ((num) < 0.0 ? -(num) : (num))
 
@@ -34,15 +46,15 @@ typedef double rtime_t;
 rtime_t timestamp(void);
 string_t markerName(string_t baseName, int n);
 
-intervalo_t *alocaVetor(long long int tam);
+intervaloA_t *alocaVetor(long long int tam);
+
+intervaloA_t *liberaVetor(intervaloA_t *vetor);
 
 intervalo_t **alocaMatriz(int tam);
 
-intervalo_t *liberaVetor(intervalo_t *vetor);
-
-double calculaPotencia (double valor, int expoente);
-
 intervalo_t **liberMatriz(intervalo_t **matriz, int tam);
+
+double calculaPotencia(double base, int expoente);
 
 #endif // __UTILSOTIM_H__
 
