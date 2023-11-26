@@ -16,8 +16,7 @@ int main (){
     int n;
     long long int k;
     double tempo[3];
-    intervaloA_t *x, *y, *r, *coef, *b;
-    intervalo_t **a;
+    intervaloA_t *x, *y, *r, *coef, *b, *a;
     fesetround (FE_DOWNWARD);
     if (scanf ("%d", &n) != 1){
         fprintf (stderr, "Falha ao grau\n");
@@ -32,7 +31,7 @@ int main (){
     r = alocaVetor (k);
     coef = alocaVetor (n+1);
     b = alocaVetor (n+1);
-    a = alocaMatriz (n+1);
+    a = alocaVetor((n+1)*(n+1));
     LIKWID_MARKER_INIT;
     fesetround (FE_DOWNWARD);
     for (long long int i = 0; i < k; i++){ //loop unroll
@@ -44,8 +43,8 @@ int main (){
             fprintf (stderr, "Falha ao ler um dos pontos\n");
             exit (1);
         }
-        calculaIntervalo (x->inicio[i], &x->fim[i]);
-        calculaIntervalo (y->inicio[i], &y->fim[i]);
+        CALCULA_INTERVALO (x->inicio[i], &x->fim[i]);
+        CALCULA_INTERVALO (y->inicio[i], &y->fim[i]);
     }
     LIKWID_MARKER_START("geraSistema");
     tempo[0] = timestamp();
@@ -58,19 +57,23 @@ int main (){
     retroSub (a, b, coef, n+1);
     tempo[1] = timestamp() - tempo[1];
     LIKWID_MARKER_STOP("resolveSistema");
-    // for (int i = 0; i <=n; i++){
-    //     printf ("[%1.16e, %1.16e] ", coef->inicio[i], coef->fim[i]);
-    // }
+    #ifdef _DEBUG_
+    for (int i = 0; i <=n; i++){
+        printf ("[%1.16e, %1.16e] ", coef->inicio[i], coef->fim[i]);
+    }
     printf ("\n");
+    #endif // _DEBUG_
     LIKWID_MARKER_START("calculaResiduo");
     tempo[2] = timestamp();
     calculaResiduo (coef, x, y, k, n + 1, r);
     tempo[2] = timestamp() - tempo[2];
     LIKWID_MARKER_STOP("calculaResiduo");
-    //for (long long int i = 0; i < k; i++){
-        //printf ("[%1.16e, %1.16e] ", r->inicio[i], r->fim[i]);
-    //}
+    #ifdef _DEBUG_
+    for (long long int i = 0; i < k; i++){
+        printf ("[%1.16e, %1.16e] ", r->inicio[i], r->fim[i]);
+    }
     printf ("\n");
+    #endif // _DEBUG_
     printf ("%1.16e\n%1.16e\n%1.16e\n", tempo[0], tempo[1], tempo[2]);
     LIKWID_MARKER_CLOSE;
     x = liberaVetor (x);
@@ -78,6 +81,6 @@ int main (){
     r = liberaVetor (r);
     coef = liberaVetor (coef);
     b = liberaVetor (b);
-    a = liberMatriz (a, n+1);
+    a = liberaVetor (a);
     return 0;
 }

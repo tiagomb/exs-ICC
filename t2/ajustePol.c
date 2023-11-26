@@ -56,10 +56,12 @@ int main (){
     retroSub (a, b, coef, n+1);
     tempo[1] = timestamp() - tempo[1];
     LIKWID_MARKER_STOP("resolveSistema");
-    // for (int i = 0; i <=n; i++){
-    //     printf ("[%1.16e, %1.16e] ", coef[i].inicio, coef[i].fim);
-    // }
+    #ifdef _DEBUG_
+    for (int i = 0; i <=n; i++){
+        printf ("[%1.16e, %1.16e] ", coef[i].inicio, coef[i].fim);
+    }
     printf ("\n");
+    #endif // _DEBUG_
     LIKWID_MARKER_START("calculaResiduo");
     tempo[2] = timestamp();
     calculaResiduo (coef, x, y, k, n + 1);

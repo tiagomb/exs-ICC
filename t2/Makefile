@@ -4,7 +4,7 @@
 # Compilador
 	LIKWID_HOME = /home/soft/likwid
     CC     = gcc
-    CFLAGS = -Wall -g -O3 -mavx -march=native -I${LIKWID_HOME}/include -DLIKWID_PERFMON 
+    CFLAGS = -Wall -g -O3 -mavx -march=native -falign-functions=32 -falign-loops=32 -I${LIKWID_HOME}/include -DLIKWID_PERFMON 
     LIBS = -L${LIKWID_HOME}/lib -llikwid -lm
 
 # Lista de arquivos para distribuição
@@ -15,6 +15,10 @@
 
 all: ajustePol
 
+debug: CFLAGS += -D_DEBUG_
+debug: ajustePol ajustePolOtim
+
+
 clean:
 	@echo "Limpando tudo ..."
 	@rm -f $(PROG) *.o core a.out $(DISTDIR) $(DISTDIR).tar
@@ -22,8 +26,8 @@ clean:
 ajustePol: ajustePol.o interval.o utils.o sistemas.o
 	gcc $(CFLAGS) -o ajustePol ajustePol.o interval.o utils.o sistemas.o $(LIBS)
 
-ajustePolOtim: ajustePolOtim.o intervalOtim.o utilsOtim.o sistemasOtim.o
-	gcc $(CFLAGS) -o ajustePolOtim ajustePolOtim.o intervalOtim.o utilsOtim.o sistemasOtim.o $(LIBS)
+ajustePolOtim: ajustePolOtim.o utilsOtim.o sistemasOtim.o
+	gcc $(CFLAGS) -o ajustePolOtim ajustePolOtim.o utilsOtim.o sistemasOtim.o $(LIBS)
 
 ajustePol.o: ajustePol.c
 	gcc -c $(CFLAGS) ajustePol.c  $(LIBS)
@@ -33,9 +37,6 @@ ajustePolOtim.o: ajustePolOtim.c
 
 interval.o: interval.c interval.h
 	gcc -c $(CFLAGS) interval.c $(LIBS)
-
-intervalOtim.o: intervalOtim.c intervalOtim.h
-	gcc -c $(CFLAGS) intervalOtim.c $(LIBS)
 
 sistemas.o: sistemas.c sistemas.h
 	gcc -c $(CFLAGS) sistemas.c $(LIBS)
