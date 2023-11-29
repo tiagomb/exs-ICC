@@ -12,9 +12,9 @@ Módulos:
     
     ajustePol.c: Main que recebe os valores de entrada e é responsável pela inicialização das estruturas, chamadas de procedimentos necessários para o funcionamento do código e a medição de tempo e FLOPS do programa. 
 
-    intervalOtim.h: Contém macros das funções da biblioteca interval.h 
+    intervalOtim.h: Contém macros das funções da biblioteca interval.h.
 
-    sistemasOtim.h: Desenrolar de laços nas funções "calculaResíduo" e "calculaAeB"
+    sistemasOtim.h: Desenrolar de laços nas funções "calculaResíduo" e "calculaAeB".
 
     utilsOtim.h: Biblioteca disponibilizada na especificação do trabalho, com a adição de funções para alocação e liberação de vetores da versão otimizada, e um macro para calculo de potências.
 
