@@ -13,7 +13,7 @@
 
 .PHONY: all clean purge dist
 
-all: ajustePol
+all: ajustePol ajustePolOtim gera_entrada
 
 debug: CFLAGS += -D_DEBUG_
 debug: ajustePol ajustePolOtim
@@ -21,13 +21,16 @@ debug: ajustePol ajustePolOtim
 
 clean:
 	@echo "Limpando tudo ..."
-	@rm -f $(PROG) *.o core a.out $(DISTDIR) $(DISTDIR).tar
+	@rm -f ajustePol ajustePolOtim gera_entrada *.o core a.out $(DISTDIR) $(DISTDIR).tar
 
 ajustePol: ajustePol.o interval.o utils.o sistemas.o
 	gcc $(CFLAGS) -o ajustePol ajustePol.o interval.o utils.o sistemas.o $(LIBS)
 
 ajustePolOtim: ajustePolOtim.o utilsOtim.o sistemasOtim.o
 	gcc $(CFLAGS) -o ajustePolOtim ajustePolOtim.o utilsOtim.o sistemasOtim.o $(LIBS)
+
+gera_entrada: gera_entrada.c
+	gcc gera_entrada.c -o gera_entrada
 
 ajustePol.o: ajustePol.c
 	gcc -c $(CFLAGS) ajustePol.c  $(LIBS)

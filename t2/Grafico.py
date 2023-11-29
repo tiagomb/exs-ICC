@@ -110,7 +110,7 @@ x2 = [64, 128, 200, 256, 512, 600, 800, 1024, 2000, 3000, 4096, 6000, 7000, 1000
 x2 = np.log(x2)
 
 
-fig, axs = plt.subplots(4, 3)
+fig, axs = plt.subplots(4, 3, sharex = True)
 
 axs[0, 0].plot(x, vetor_tempoGera, label="semOtim", color="orange")
 axs[0, 0].plot(x, vetor_tempoGeraotim, label="comOtim", color="blue")
@@ -122,6 +122,7 @@ axs[1, 0].plot(x, vetor_dpGera, label="dpSemOtim", color="orange")
 axs[1, 0].plot(x, vetor_avxGera, label="avxSemOtim", color="blue")
 axs[1, 0].plot(x2, vetor_dpGeraotim, label="dpComOtim", color="red")
 axs[1, 0].plot(x2, vetor_avxGeraotim, label="avxComOtim", color="green")
+axs[1, 0].set_xlabel("Número de pontos")
 axs[1, 0].set_ylabel("FLOPS_DP e FLOPS_AVX(MFlop/s)")
 axs[1, 0].legend()
 
@@ -133,7 +134,6 @@ axs[2, 0].legend()
 axs[3, 0].plot(x, vetor_memoryGera, label="semOtim", color="orange")
 axs[3, 0].plot(x2, vetor_memoryGeraotim, label="comOtim", color="blue")
 axs[3, 0].set_ylabel("Memória (MByte/s)")
-axs[3, 0].set_xlabel("Número de pontos")
 axs[3, 0].legend()
 
 axs[0, 1].plot(x, vetor_tempoCalcula, label="semOtim", color="orange")
@@ -146,10 +146,9 @@ axs[1, 1].plot(x, vetor_dpCalcula, label="dpSemOtim", color="orange")
 axs[1, 1].plot(x, vetor_avxCalcula, label="avxSemOtim", color="blue")
 axs[1, 1].plot(x2, vetor_dpCalculaotim, label="dpComOtim", color="red")
 axs[1, 1].plot(x2, vetor_avxCalculaotim, label="avxComOtim", color="green")
+axs[1, 1].set_xlabel("Número de pontos")
 axs[1, 1].set_ylabel("FLOPS (MFlop/s)")
 axs[1, 1].legend()
-
-axs[3, 1].set_xlabel("Número de pontos")
 
 axs[0, 2].plot(x, vetor_tempoResiduo, label="semOtim", color="orange")
 axs[0, 2].plot(x, vetor_tempoResiduootim, label="comOtim", color="blue")
@@ -161,6 +160,7 @@ axs[1, 2].plot(x, vetor_dpResiduo, label="dpSemOtim", color="orange")
 axs[1, 2].plot(x, vetor_avxResiduo, label="avxSemOtim", color="blue")
 axs[1, 2].plot(x2, vetor_dpResiduootim, label="dpComOtim", color="red")
 axs[1, 2].plot(x2, vetor_avxResiduootim, label="avxComOtim", color="green")
+axs[1, 2].set_xlabel("Número de pontos")
 axs[1, 2].set_ylabel("FLOPS (MFlop/s)")
 axs[1, 2].legend()
 
@@ -172,7 +172,6 @@ axs[2, 2].legend()
 axs[3, 2].plot(x, vetor_memoryResiduo, label="semOtim", color="orange")
 axs[3, 2].plot(x2, vetor_memoryResiduootim, label="comOtim", color="blue")
 axs[3, 2].set_ylabel("Memória (MByte/s)")
-axs[3, 2].set_xlabel("Número de pontos")
 axs[3, 2].legend()
 
 plt.show()

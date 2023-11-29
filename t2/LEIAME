@@ -24,4 +24,4 @@ Módulos:
 
 Considerações:
 	- O Makefile possui uma opção de debug para imprimir os coeficientes e resíduos, basta dar "make debug" e rodar os programas. O script para geração dos gráficos faz o make sem essa opção, para facilitar a filtragem das informações necessárias.
-    
+    - O arquivo tar enviado conterá os resultados obtidos no teste realizado (resultado e resultadoOtim). Esses arquivos podem ser utilizados para gerar o gráfico diretamente, executando o comando "python3 Grafico.py". Também é possível executar o script.sh para gerar novos valores nesses arquivos e também gerar o gráfico.

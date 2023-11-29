@@ -68,12 +68,6 @@ int main (){
     calculaResiduo (coef, x, y, k, n + 1, r);
     tempo[2] = timestamp() - tempo[2];
     LIKWID_MARKER_STOP("calculaResiduo");
-    #ifdef _DEBUG_
-    for (long long int i = 0; i < k; i++){
-        printf ("[%1.16e, %1.16e] ", r->inicio[i], r->fim[i]);
-    }
-    printf ("\n");
-    #endif // _DEBUG_
     printf ("%1.16e\n%1.16e\n%1.16e\n", tempo[0], tempo[1], tempo[2]);
     LIKWID_MARKER_CLOSE;
     x = liberaVetor (x);
