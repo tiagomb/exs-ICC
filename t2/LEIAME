@@ -16,11 +16,12 @@ Módulos:
 
     sistemasOtim.h: Desenrolar de laços nas funções "calculaResíduo" e "calculaAeB"
 
-    utilsOtim.h:
+    utilsOtim.h: Biblioteca disponibilizada na especificação do trabalho, com a adição de funções para alocação e liberação de vetores da versão otimizada, e um macro para calculo de potências.
 
-    ajustePolOtim.c:
+    ajustePolOtim.c: Main que recebe os valores de entrada e é responsável pela inicialização das estruturas, chamadas de procedimentos necessários para o funcionamento do código otimizado e a medição das métricas do programa. 
 
-    gera_entrada.c:
+    gera_entrada.c: Programa disponibilizado pelos professores, responsável por geras as entradas que os programas recebem.
 
-
+Considerações:
+	- O Makefile possui uma opção de debug para imprimir os coeficientes e resíduos, basta dar "make debug" e rodar os programas. O script para geração dos gráficos faz o make sem essa opção, para facilitar a filtragem das informações necessárias.
     
